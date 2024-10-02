@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta sobre Vida Marina - BlueHaven</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Estilo para resaltar la opción seleccionada */
+        .selected {
+            background-color: #0d6efd;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">BlueHaven</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-search"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html"><i class="bi bi-person"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido de la Encuesta -->
+    <div class="container mt-5 pt-5">
+        <h2 class="text-center mb-5">🌊 Encuesta Interactiva sobre Vida Marina 🌊</h2>
+        <p class="text-center mb-4">¡Descubre las maravillas del océano respondiendo a estas preguntas! Selecciona la imagen que mejor describa al animal que deseas explorar.</p>
+
+        <form id="surveyForm">
+            <!-- Pregunta 1 -->
+            <div class="mb-4">
+                <h5>1. ¿Cuál es el tamaño del animal?</h5>
+                <div class="btn-group d-flex" role="group" aria-label="Tamaño del animal">
+                    <button type="button" class="btn btn-outline-primary flex-fill question1" onclick="selectOption(this, 'question1')"><i class="bi bi-fish"></i> Pequeño (Pez pequeño)</button>
+                    <button type="button" class="btn btn-outline-primary flex-fill question1" onclick="selectOption(this, 'question1')"><i class="bi bi-shield-shaded"></i> Mediano (Tiburón)</button>
+                    <button type="button" class="btn btn-outline-primary flex-fill question1" onclick="selectOption(this, 'question1')"><i class="bi bi-house-fill"></i> Grande (Ballena)</button>
+                </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="mb-4">
+                <h5>2. ¿Qué tipo de alimentación tiene?</h5>
+                <div class="btn-group d-flex" role="group" aria-label="Tipo de alimentación">
+                    <button type="button" class="btn btn-outline-success flex-fill question2" onclick="selectOption(this, 'question2')"><i class="bi bi-droplet"></i> Carnívoro (Tiburón)</button>
+                    <button type="button" class="btn btn-outline-success flex-fill question2" onclick="selectOption(this, 'question2')"><i class="bi bi-flower"></i> Herbívoro (Tortuga marina)</button>
+                    <button type="button" class="btn btn-outline-success flex-fill question2" onclick="selectOption(this, 'question2')"><i class="bi bi-basket-fill"></i> Omnívoro (Cangrejo)</button>
+                    <button type="button" class="btn btn-outline-success flex-fill question2" onclick="selectOption(this, 'question2')"><i class="bi bi-filter-circle-fill"></i> Filtrador (Ballena)</button>
+                </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="mb-4">
+                <h5>3. ¿Cuál es su rol ecológico?</h5>
+                <div class="btn-group d-flex" role="group" aria-label="Rol ecológico">
+                    <button type="button" class="btn btn-outline-info flex-fill question3" onclick="selectOption(this, 'question3')"><i class="bi bi-shield-fill-check"></i> Depredador (Tiburón)</button>
+                    <button type="button" class="btn btn-outline-info flex-fill question3" onclick="selectOption(this, 'question3')"><i class="bi bi-fish"></i> Presa (Pez pequeño)</button>
+                    <button type="button" class="btn btn-outline-info flex-fill question3" onclick="selectOption(this, 'question3')"><i class="bi bi-recycle"></i> Descomponedor (Pepino de mar)</button>
+                    <button type="button" class="btn btn-outline-info flex-fill question3" onclick="selectOption(this, 'question3')"><i class="bi bi-hand-thumbs-up-fill"></i> Simbiótico (Pez payaso)</button>
+                </div>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="mb-4">
+                <h5>4. ¿Cómo se reproduce?</h5>
+                <div class="btn-group d-flex" role="group" aria-label="Modo de reproducción">
+                    <button type="button" class="btn btn-outline-warning flex-fill question4" onclick="selectOption(this, 'question4')"><i class="bi bi-egg-fill"></i> Ovíparo (Tortuga marina)</button>
+                    <button type="button" class="btn btn-outline-warning flex-fill question4" onclick="selectOption(this, 'question4')"><i class="bi bi-person-fill"></i> Vivíparo (Delfín)</button>
+                    <button type="button" class="btn btn-outline-warning flex-fill question4" onclick="selectOption(this, 'question4')"><i class="bi bi-water"></i> Ovovivíparo (Tiburón)</button>
+                </div>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="mb-4">
+                <h5>5. ¿Dónde vive?</h5>
+                <div class="btn-group d-flex" role="group" aria-label="Hábitat">
+                    <button type="button" class="btn btn-outline-dark flex-fill question5" onclick="selectOption(this, 'question5')"><i class="bi bi-sun"></i> Aguas tropicales (Arrecife de coral)</button>
+                    <button type="button" class="btn btn-outline-dark flex-fill question5" onclick="selectOption(this, 'question5')"><i class="bi bi-thermometer-half"></i> Aguas templadas</button>
+                    <button type="button" class="btn btn-outline-dark flex-fill question5" onclick="selectOption(this, 'question5')"><i class="bi bi-snow"></i> Aguas frías (Océano Ártico)</button>
+                    <button type="button" class="btn btn-outline-dark flex-fill question5" onclick="selectOption(this, 'question5')"><i class="bi bi-cloud-drizzle-fill"></i> Océano profundo</button>
+                    <button type="button" class="btn btn-outline-dark flex-fill question5" onclick="selectOption(this, 'question5')"><i class="bi bi-geo-fill"></i> Arrecifes de coral</button>
+                </div>
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="text-center mt-5">
+                <button type="submit" class="btn btn-primary">Enviar Encuesta</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectOption(button, questionClass) {
+            // Remover la clase "selected" de todos los botones de la misma pregunta
+            const buttons = document.querySelectorAll(`.${questionClass}`);
+            buttons.forEach(btn => btn.classList.remove('selected'));
+
+            // Añadir la clase "selected" al botón seleccionado
+            button.classList.add('selected');
+        }
+    </script>
+</body>
+</html>
