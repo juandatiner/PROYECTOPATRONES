@@ -58,10 +58,10 @@ if ($usuario_nuevo == 1) {
                         <img src="images/clownfish.jpg" class="d-block w-100" alt="Pez Payaso">
                     </div>
                     <div class="carousel-item">
-                        <img src="images/turtle.jpg" class="d-block w-100" alt="Tortuga Marina">
+                        <img src="../images/turtle.jpg" class="d-block w-100" alt="Tortuga Marina">
                     </div>
                     <div class="carousel-item">
-                        <img src="images/shark.jpg" class="d-block w-100" alt="Tiburón">
+                        <img src="../images/shark.jpg" class="d-block w-100" alt="Tiburón">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
@@ -83,7 +83,7 @@ if ($usuario_nuevo == 1) {
             <div class="row mt-4">
                 <div class="col-md-4">
                     <div class="card category-card">
-                        <img src="images/continents.jpg" class="card-img-top" alt="Continentes">
+                        <img src="../images/continents.jpg" class="card-img-top" alt="Continentes">
                         <div class="card-body">
                             <h5 class="card-title">Continentes</h5>
                             <p class="card-text">Explora la vida marina en los diferentes continentes del mundo.</p>
@@ -93,7 +93,7 @@ if ($usuario_nuevo == 1) {
                 </div>
                 <div class="col-md-4">
                     <div class="card category-card">
-                        <img src="images/endangered.jpg" class="card-img-top" alt="Animales en Peligro">
+                        <img src="../images/endangered.jpg" class="card-img-top" alt="Animales en Peligro">
                         <div class="card-body">
                             <h5 class="card-title">Peligro de Extinción</h5>
                             <p class="card-text">Conoce más sobre los animales marinos en peligro de extinción.</p>
@@ -103,7 +103,7 @@ if ($usuario_nuevo == 1) {
                 </div>
                 <div class="col-md-4">
                     <div class="card category-card">
-                        <img src="images/favorites.jpg" class="card-img-top" alt="Favoritos">
+                        <img src="../images/favorites.jpg" class="card-img-top" alt="Favoritos">
                         <div class="card-body">
                             <h5 class="card-title">Favoritos</h5>
                             <p class="card-text">Encuentra y guarda tus animales marinos favoritos.</p>
