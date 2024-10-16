@@ -169,26 +169,6 @@ $conn->close();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<script>
-    // JavaScript para capturar el cierre de la pestaña o ventana
-window.addEventListener('beforeunload', function (e) {
-    // Llamar a la función que cerrará la sesión
-    cerrarSesion();
-    
-    // No mostramos el cuadro de confirmación al usuario (modern browsers lo ignoran)
-    e.preventDefault();
-    e.returnValue = ''; // Algunas navegadores pueden requerir esto
-});
-
-function cerrarSesion() {
-    // Enviar petición AJAX al servidor para cerrar la sesión
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "logout.php", true);  // Enviar la petición al script PHP
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("cerrarSesion=1");  // Enviar una variable para que PHP sepa que debe cerrar la sesión
-}
-
-</script>
 </html>
 
 
