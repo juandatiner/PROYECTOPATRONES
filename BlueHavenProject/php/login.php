@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 $message = "";
@@ -27,25 +26,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['loggedin'] = true;
             $_SESSION['correo'] = $correo;
 
-            // Depuración: Imprimir los valores de la sesión
-            echo "<pre>";
-            var_dump($_SESSION); 
-            echo "</pre>";
+            // Cerrar la consulta anterior antes de realizar una nueva
+            $stmt->close(); 
 
-            echo "Usuario encontrado y contraseña verificada. Usuario nuevo: " . $usuario_nuevo . "<br>";
+            // Actualizar la columna sesion_activa a 1 cuando el usuario inicia sesión
+            $update_sql = "UPDATE usuarios SET sesion_activa = 1 WHERE correo = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("s", $correo);
 
-            // Verificar si el usuario es nuevo
-            if ($usuario_nuevo) {
-                // Redirigir a la encuesta si es la primera vez
-                echo "Redirigiendo a la encuesta...<br>";
-                header("Location: survey.php");
-                exit();
+            if ($update_stmt->execute()) {
+                // Depuración: Imprimir los valores de la sesión
+                echo "<pre>";
+                var_dump($_SESSION); 
+                echo "</pre>";
+
+                // Verificar si el usuario es nuevo
+                if ($usuario_nuevo) {
+                    // Redirigir a la encuesta si es la primera vez
+                    echo "Redirigiendo a la encuesta...<br>";
+                    header("Location: survey.php");
+                    exit();
+                } else {
+                    // Redirigir a home si no es la primera vez
+                    echo "Redirigiendo a home...<br>";
+                    header("Location: home.php");
+                    exit();
+                }
             } else {
-                // Redirigir a home si no es la primera vez
-                echo "Redirigiendo a home...<br>";
-                header("Location: home.php");
-                exit();
+                // Manejar errores en la actualización de sesion_activa
+                $message = "Error al actualizar el estado de sesión activa.";
             }
+
+            $update_stmt->close();
+
         } else {
             $message = "Credenciales incorrectas. Por favor, intente de nuevo.";
         }
@@ -53,12 +66,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Credenciales incorrectas. Por favor, intente de nuevo.";
     }
 
-    $stmt->close();
+    // Cerrar la conexión a la base de datos
     $conn->close();
 }
 ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueHaven - Descubre la Vida Marina</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="home.php">BlueHaven</a>
+        </div>
+    </nav>
 
-<?php include 'includes/header.php'; ?>
+    
+</body>
 
 <!-- Formulario de Iniciar Sesión -->
 <div class="container mt-5 pt-5">
@@ -87,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="row justify-content-center">
         <div class="col-md-6">
             <button class="btn btn-light border w-100 mb-3" onclick="window.location.href='register.php';">
-                <i class="bi bi-envelope"></i> Continuar con Correo Electrónico
+                Continuar con Correo Electrónico
             </button>
             <p class="text-center">Al crear una cuenta, aceptas los <a href="#">Términos y condiciones</a> y la <a href="#">Política de privacidad</a>.</p>
         </div>

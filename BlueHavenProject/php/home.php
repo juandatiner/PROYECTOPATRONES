@@ -1,40 +1,40 @@
 <?php
-
-session_start();
+// Incluir la conexión a la base de datos desde 'includes/db.php'
+include('includes/db.php');
 
 // Verificar si el usuario está logueado
-if (!isset($_SESSION['usuario_id'])) {
-    echo "Usuario no está logueado, redirigiendo a login...<br>";
+session_start();
+if (!isset($_SESSION['correo'])) {
+    // Si no hay sesión de usuario, redirigir al login
     header("Location: login.php");
     exit();
 }
 
-// Conexión incluida desde el archivo db.php
-include('includes/db.php');
+$correo = $_SESSION['correo'];
 
-// Verificar si el usuario ya completó la encuesta
-$usuario_id = $_SESSION['usuario_id'];
-echo "ID de usuario desde la sesión: " . $usuario_id . "<br>"; // Verificar si el usuario_id es correcto
+// Verificar si la sesión está activa
+$sql_check_sesion = "SELECT sesion_activa, usuario_nuevo FROM usuarios WHERE correo = ?";
+$stmt_check_sesion = $conn->prepare($sql_check_sesion);
+$stmt_check_sesion->bind_param("s", $correo);
+$stmt_check_sesion->execute();
+$stmt_check_sesion->bind_result($sesion_activa, $usuario_nuevo);
+$stmt_check_sesion->fetch();
+$stmt_check_sesion->close();
 
-$sql = "SELECT usuario_nuevo FROM usuarios WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $usuario_id);
-$stmt->execute();
-$stmt->bind_result($usuario_nuevo);
-$stmt->fetch();
-$stmt->close();
+// Verificar si la sesión está activa (sesion_activa = 1)
+if ($sesion_activa == 0) {
+    // Redirigir al login si la sesión no está activa
+    header("Location: login.php");
+    exit();
+}
 
-// Depuración: Verifica el valor de usuario_nuevo
-echo "Valor de usuario_nuevo desde la base de datos: " . $usuario_nuevo . "<br>";
-
-// Si el usuario es nuevo (usuario_nuevo = 1), redirigir a la encuesta
+// Verificar si el usuario ya ha completado la encuesta
 if ($usuario_nuevo == 1) {
-    echo "Usuario es nuevo, redirigiendo a survey.php...<br>";
+    // Si el usuario es nuevo (usuario_nuevo = 1), redirigir a la encuesta
     header("Location: survey.php");
     exit();
 } else {
     // Si ya completó la encuesta, mostrar el contenido de la página principal
-    echo "Usuario ya completó la encuesta, mostrando la página principal...<br>";
     include('includes/header.php');
     ?>
 
@@ -115,6 +115,29 @@ if ($usuario_nuevo == 1) {
         </div>
     </section>
 
+    <script>
+        // JavaScript para capturar el cierre de la pestaña o ventana
+    window.addEventListener('beforeunload', function (e) {
+        // Llamar a la función que cerrará la sesión
+        cerrarSesion();
+        
+        // No mostramos el cuadro de confirmación al usuario (modern browsers lo ignoran)
+        e.preventDefault();
+        e.returnValue = ''; // Algunas navegadores pueden requerir esto
+    });
+
+    function cerrarSesion() {
+        // Enviar petición AJAX al servidor para cerrar la sesión
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "logout.php", true);  // Enviar la petición al script PHP
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("cerrarSesion=1");  // Enviar una variable para que PHP sepa que debe cerrar la sesión
+    }
+
+    </script>
+
     <?php include('includes/footer.php'); ?>
 
-<?php } ?>
+<?php
+}
+?>
