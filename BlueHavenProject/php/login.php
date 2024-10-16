@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button class="btn btn-light border w-100 mb-3" onclick="window.location.href='register.php';">
                 Continuar con Correo Electrónico
             </button>
-            <p class="text-center">Al crear una cuenta, aceptas los <a href="#">Términos y condiciones</a> y la <a href="#">Política de privacidad</a>.</p>
+            <p class="text-center">Al crear una cuenta, aceptas los <a href="../html/terms.html">Términos y condiciones</a> y la <a href="../html/privacy.html">Política de privacidad</a>.</p>
         </div>
     </div>
 </div>
