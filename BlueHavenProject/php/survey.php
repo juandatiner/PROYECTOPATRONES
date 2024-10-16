@@ -29,30 +29,38 @@ if ($usuario_nuevo == 0) {
 // Procesar el formulario de la encuesta
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitizar y obtener las respuestas de la encuesta (valores seleccionados)
-    $pregunta1 = htmlspecialchars($_POST['question1'] ?? '', ENT_QUOTES, 'UTF-8');
-    $pregunta2 = htmlspecialchars($_POST['question2'] ?? '', ENT_QUOTES, 'UTF-8');
-    $pregunta3 = htmlspecialchars($_POST['question3'] ?? '', ENT_QUOTES, 'UTF-8');
-    $pregunta4 = htmlspecialchars($_POST['question4'] ?? '', ENT_QUOTES, 'UTF-8');
-    $pregunta5 = htmlspecialchars($_POST['question5'] ?? '', ENT_QUOTES, 'UTF-8');
+    $tamaño_animal = htmlspecialchars($_POST['question1'] ?? '', ENT_QUOTES, 'UTF-8');
+    $tipo_alimentacion = htmlspecialchars($_POST['question2'] ?? '', ENT_QUOTES, 'UTF-8');
+    $rol_ecologico = htmlspecialchars($_POST['question3'] ?? '', ENT_QUOTES, 'UTF-8');
+    $metodo_reproduccion = htmlspecialchars($_POST['question4'] ?? '', ENT_QUOTES, 'UTF-8');
+    $habitat_principal = htmlspecialchars($_POST['question5'] ?? '', ENT_QUOTES, 'UTF-8');
 
     // Verificar que todas las preguntas tengan una respuesta
-    if (!empty($pregunta1) && !empty($pregunta2) && !empty($pregunta3) && !empty($pregunta4) && !empty($pregunta5)) {
-        // Actualizar la columna 'usuario_nuevo' a 0 (false) para este usuario
-        $sql_update = "UPDATE usuarios SET usuario_nuevo = FALSE WHERE correo = ?";
-        $stmt_update = $conn->prepare($sql_update);
-        $stmt_update->bind_param("s", $correo);
+    if (!empty($tamaño_animal) && !empty($tipo_alimentacion) && !empty($rol_ecologico) && !empty($metodo_reproduccion) && !empty($habitat_principal)) {
+        // Insertar las respuestas en la base de datos
+        $sql_insert = "INSERT INTO respuestas_encuesta (correo, tamaño_animal, tipo_alimentacion, rol_ecologico, metodo_reproduccion, habitat_principal) 
+                       VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bind_param("ssssss", $correo, $tamaño_animal, $tipo_alimentacion, $rol_ecologico, $metodo_reproduccion, $habitat_principal);
 
-        if ($stmt_update->execute()) {
-            // Si se actualiza correctamente, redirigir o mostrar mensaje de éxito
+        if ($stmt_insert->execute()) {
+            // Si la encuesta se guarda correctamente, actualizar la columna 'usuario_nuevo' a 0 (false) para este usuario
+            $sql_update = "UPDATE usuarios SET usuario_nuevo = FALSE WHERE correo = ?";
+            $stmt_update = $conn->prepare($sql_update);
+            $stmt_update->bind_param("s", $correo);
+            $stmt_update->execute();
+            $stmt_update->close();
+
+            // Redirigir con mensaje de éxito
             echo "<script>
                     alert('¡Gracias por completar la encuesta!');
                     window.location.href = 'home.php';
                 </script>";
         } else {
-            echo "Error al actualizar el usuario: " . $stmt_update->error;
+            echo "Error al guardar las respuestas: " . $stmt_insert->error;
         }
 
-        $stmt_update->close();
+        $stmt_insert->close();
     } else {
         // Si faltan preguntas, mostrar un mensaje de error
         echo "<script>
