@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,28 +51,17 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="home.php">BlueHaven</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Ícono de búsqueda con un campo siempre visible -->
-                    <li class="nav-item">
-                        <div class="search-container">
-                            <i class="bi bi-search"></i>
-                            <input class="form-control" type="text" placeholder="De qué animal quieres conocer..." aria-label="Buscar">
-                        </div>
-                    </li>
-
-                    <!-- Menú desplegable de usuario -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person"></i> Mi Cuenta
+                    <li class="nav-item d-flex align-items-center">
+                        <?php if (isset($_COOKIE['username']) && !empty($_COOKIE['username'])): ?>
+                            <span class="text-white me-3">Bienvenido, <?= htmlspecialchars($_COOKIE['username']) ?></span>
+                        <?php else: ?>
+                            <span class="text-white me-3">Bienvenido, Invitado</span>
+                        <?php endif; ?>
+                        <a class="nav-link" href="logout.php" title="Cerrar sesión">
+                            <i class="bi bi-power text-white"></i>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="profile.php">Mi Perfil</a></li>
-                            <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>

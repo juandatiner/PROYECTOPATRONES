@@ -4,6 +4,11 @@ include('includes/db.php');
 
 // Iniciar la sesión
 session_start();
+if (!isset($_SESSION['correo'])) {
+    // Si no hay sesión de usuario, redirigir al login
+    header("Location: login.php");
+    exit();
+}
 
 if (isset($_POST['cerrarSesion']) && isset($_SESSION['correo'])) {
     $correo = $_SESSION['correo'];
@@ -19,7 +24,6 @@ if (isset($_POST['cerrarSesion']) && isset($_SESSION['correo'])) {
     session_unset();  // Eliminar todas las variables de sesión
     session_destroy();  // Destruir la sesión
 
-    // Devolver una respuesta (opcional, no se utiliza en este caso)
-    echo "Sesión cerrada";
+    exit();  // Asegurarse de que no se ejecuta código adicional
 }
 ?>

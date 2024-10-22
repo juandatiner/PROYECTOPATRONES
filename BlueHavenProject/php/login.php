@@ -13,11 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'includes/db.php'; 
 
     // Buscar el usuario por correo
-    $sql = "SELECT contrasena, usuario_nuevo FROM usuarios WHERE correo = ?";
+    $sql = "SELECT nombre, contrasena, usuario_nuevo FROM usuarios WHERE correo = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $correo);
     $stmt->execute();
-    $stmt->bind_result($hashed_password, $usuario_nuevo);
+    $stmt->bind_result($nombre_usuario, $hashed_password, $usuario_nuevo);
 
     if ($stmt->fetch()) {
         // Verificar la contraseña
@@ -25,6 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Iniciar sesión en el servidor
             $_SESSION['loggedin'] = true;
             $_SESSION['correo'] = $correo;
+
+            // Establecer la cookie con el nombre del usuario
+            setcookie('username', $nombre_usuario, time() + (86400 * 30), "/"); // 30 días
 
             // Cerrar la consulta anterior antes de realizar una nueva
             $stmt->close(); 
@@ -35,11 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $update_stmt->bind_param("s", $correo);
 
             if ($update_stmt->execute()) {
-                // Depuración: Imprimir los valores de la sesión
-                echo "<pre>";
-                var_dump($_SESSION); 
-                echo "</pre>";
-
                 // Verificar si el usuario es nuevo
                 if ($usuario_nuevo) {
                     // Redirigir a la encuesta si es la primera vez
@@ -108,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
             </form>
+            <p class="text-center mt-3"><a href="recover_password.php">¿Olvidaste tu contraseña?</a></p>
         </div>
     </div>
 </div>
