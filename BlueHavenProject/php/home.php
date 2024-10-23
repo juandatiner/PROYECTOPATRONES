@@ -87,7 +87,7 @@ if ($usuario_nuevo == 1) {
                         <div class="card-body">
                             <h5 class="card-title">Continentes</h5>
                             <p class="card-text">Explora la vida marina en los diferentes continentes del mundo.</p>
-                            <a href="continents.php" class="btn btn-primary">Explorar</a>
+                            <a href="continentes.php" class="btn btn-primary">Explorar</a>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ if ($usuario_nuevo == 1) {
                         <div class="card-body">
                             <h5 class="card-title">Peligro de Extinción</h5>
                             <p class="card-text">Conoce más sobre los animales marinos en peligro de extinción.</p>
-                            <a href="endangered.php" class="btn btn-primary">Explorar</a>
+                            <a href="peligroExtincion.php" class="btn btn-primary">Explorar</a>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@ if ($usuario_nuevo == 1) {
                         <div class="card-body">
                             <h5 class="card-title">Favoritos</h5>
                             <p class="card-text">Encuentra y guarda tus animales marinos favoritos.</p>
-                            <a href="favorites.php" class="btn btn-primary">Explorar</a>
+                            <a href="favoritos.php" class="btn btn-primary">Explorar</a>
                         </div>
                     </div>
                 </div>
@@ -116,14 +116,34 @@ if ($usuario_nuevo == 1) {
     </section>
 
     <script>
-        // JavaScript para capturar el cierre de la pestaña o ventana
+    // Variable para indicar si el usuario está navegando
+    var navegandoIntencionalmente = false;
+
+    // Lista de páginas a las que se considera navegación intencional
+    var paginasValidas = ["continentes.php", "favoritos.php", "peligroExtincion.php"];
+
+    // Escuchar los clicks en los enlaces
+    document.addEventListener('click', function(e) {
+        // Verificar si el click fue en un enlace (a)
+        if (e.target.tagName === 'A') {
+            var url = e.target.getAttribute('href'); // Obtener la URL del enlace
+            // Verificar si la URL está en la lista de páginas válidas
+            if (paginasValidas.some(pagina => url.includes(pagina))) {
+                navegandoIntencionalmente = true; // Marcar como navegación intencional
+            }
+        }
+    });
+
+    // JavaScript para capturar el cierre de la pestaña o ventana
     window.addEventListener('beforeunload', function (e) {
-        // Llamar a la función que cerrará la sesión
-        cerrarSesion();
-        
-        // No mostramos el cuadro de confirmación al usuario (modern browsers lo ignoran)
-        e.preventDefault();
-        e.returnValue = ''; // Algunas navegadores pueden requerir esto
+        if (!navegandoIntencionalmente) {
+            // Llamar a la función que cerrará la sesión
+            cerrarSesion();
+            
+            // No mostramos el cuadro de confirmación al usuario (modern browsers lo ignoran)
+            e.preventDefault();
+            e.returnValue = ''; // Algunas navegadores pueden requerir esto
+        }
     });
 
     function cerrarSesion() {
@@ -133,7 +153,6 @@ if ($usuario_nuevo == 1) {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("cerrarSesion=1");  // Enviar una variable para que PHP sepa que debe cerrar la sesión
     }
-
     </script>
 
     <?php include('includes/footer.php'); ?>
