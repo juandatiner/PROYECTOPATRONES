@@ -2,6 +2,12 @@
 session_start();
 $message = "";
 
+// Cargar autoload de Composer para usar PHPMailer
+require '../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanear y validar entrada
     $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -23,17 +29,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['codigo_recuperacion'] = $codigo;
         $_SESSION['correo_recuperacion'] = $correo;
 
-        // Enviar el correo (asegúrate de que tu servidor esté configurado para enviar correos)
-        $to = $correo;
-        $subject = "Recuperación de Contraseña";
-        $message = "Su código de recuperación es: $codigo";
-        $headers = "From: no-reply@bluehaven.com";
+        // Crear una instancia de PHPMailer
+        $mail = new PHPMailer(true);
 
-        if (mail($to, $subject, $message, $headers)) {
+        try {
+            // Configuraciones del servidor SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'bluehavenrecovery@gmail.com';
+            $mail->Password = 'xrugjcepzqauxrfu';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // Destinatarios
+            $mail->setFrom('no-reply@bluehaven.com', 'BlueHaven');
+            $mail->addAddress($correo);
+
+            // Contenido del correo
+            $mail->isHTML(true);
+            $mail->Subject = "Recuperacion de Contrasena";
+            $mail->Body = "Su codigo de recuperacion es: <b>$codigo</b><br>Por favor, utilicelo para restablecer su contrasena.";
+
+            // Enviar correo
+            $mail->send();
             header("Location: verify_code.php");
             exit();
-        } else {
-            $message = "Error al enviar el correo. Intente nuevamente.";
+        } catch (Exception $e) {
+            $message = "Error al enviar el correo: {$mail->ErrorInfo}";
         }
     } else {
         $message = "El correo no está registrado.";

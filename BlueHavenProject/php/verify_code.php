@@ -2,34 +2,63 @@
 session_start();
 $message = "";
 
+// URL de la página de origen que permitimos
+$pagina_origen = 'http://localhost/bluehaven/BlueHavenProject/php/recover_password.php';
+
+// Verificar si la página fue accedida desde la página de origen
+if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] !== $pagina_origen) {
+    // Si no es de la página de origen, redirigir
+    header("Location: login.php");
+    exit();
+}
+
+// Función para validar la contraseña
+function esContrasenaSegura($contrasena) {
+    return strlen($contrasena) >= 8 &&        // Longitud mínima de 8 caracteres
+           preg_match('/[A-Z]/', $contrasena) &&  // Al menos una letra mayúscula
+           preg_match('/[a-z]/', $contrasena) &&  // Al menos una letra minúscula
+           preg_match('/[0-9]/', $contrasena) &&  // Al menos un número
+           preg_match('/[\W]/', $contrasena);     // Al menos un carácter especial
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $codigo_ingresado = htmlspecialchars($_POST['code']);
-    $nueva_contrasena = password_hash(htmlspecialchars($_POST['new_password']), PASSWORD_DEFAULT);
+    $nueva_contrasena = htmlspecialchars($_POST['new_password']);
 
-    // Verificar si el código coincide
-    if ($codigo_ingresado === $_SESSION['codigo_recuperacion']) {
-        // Conexión incluida desde el archivo db.php
-        include 'includes/db.php';
-
-        // Actualizar la contraseña en la base de datos
-        $correo = $_SESSION['correo_recuperacion'];
-        $sql = "UPDATE usuarios SET contrasena = ? WHERE correo = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $nueva_contrasena, $correo);
-
-        if ($stmt->execute()) {
-            $message = "Contraseña actualizada exitosamente. Puedes iniciar sesión.";
-            // Limpiar sesión
-            unset($_SESSION['codigo_recuperacion']);
-            unset($_SESSION['correo_recuperacion']);
-        } else {
-            $message = "Error al actualizar la contraseña. Intente nuevamente.";
-        }
-
-        $stmt->close();
-        $conn->close();
+    // Validar la nueva contraseña
+    if (!esContrasenaSegura($nueva_contrasena)) {
+        $message = "La contraseña no cumple con los requisitos de seguridad.";
     } else {
-        $message = "El código ingresado es incorrecto.";
+        $nueva_contrasena_hashed = password_hash($nueva_contrasena, PASSWORD_DEFAULT);
+        
+        // Verificar si el código coincide
+        if ($codigo_ingresado === $_SESSION['codigo_recuperacion']) {
+            // Conexión incluida desde el archivo db.php
+            include 'includes/db.php';
+
+            // Actualizar la contraseña en la base de datos
+            $correo = $_SESSION['correo_recuperacion'];
+            $sql = "UPDATE usuarios SET contrasena = ? WHERE correo = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ss", $nueva_contrasena_hashed, $correo);
+
+            if ($stmt->execute()) {
+                $message = "Contraseña actualizada exitosamente. Puedes iniciar sesión.";
+                // Limpiar sesión
+                unset($_SESSION['codigo_recuperacion']);
+                unset($_SESSION['correo_recuperacion']);
+                // Redirigir a la página de inicio de sesión (opcional)
+                header("Location: login.php");
+                exit();
+            } else {
+                $message = "Error al actualizar la contraseña. Intente nuevamente.";
+            }
+
+            $stmt->close();
+            $conn->close();
+        } else {
+            $message = "El código ingresado es incorrecto.";
+        }
     }
 }
 ?>
