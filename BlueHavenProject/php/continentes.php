@@ -169,16 +169,9 @@ if ($sesion_activa == 0) {
 </html>
 
 <script>
-    // JavaScript para capturar el cierre de la pestaña o ventana
-    window.addEventListener('beforeunload', function (e) {
-        // Llamar a la función que cerrará la sesión
-        cerrarSesion();
-        
-        // No mostramos el cuadro de confirmación al usuario (modern browsers lo ignoran)
-        e.preventDefault();
-        e.returnValue = ''; // Algunas navegadores pueden requerir esto
-    });
+    let isClosingTab = false;
 
+    // Función para cerrar sesión
     function cerrarSesion() {
         // Enviar petición AJAX al servidor para cerrar la sesión
         var xhr = new XMLHttpRequest();
@@ -186,4 +179,26 @@ if ($sesion_activa == 0) {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("cerrarSesion=1");  // Enviar una variable para que PHP sepa que debe cerrar la sesión
     }
+
+    // Escuchar el evento de cerrar la pestaña
+    window.addEventListener('beforeunload', function (e) {
+        if (isClosingTab) {
+            cerrarSesion(); // Solo llamar a cerrar sesión si realmente se está cerrando la pestaña
+        }
+        
+        // No mostramos el cuadro de confirmación al usuario (modern browsers lo ignoran)
+        e.preventDefault();
+        e.returnValue = ''; // Algunas navegadores pueden requerir esto
+    });
+
+    // Agregar un listener para el evento unload
+    window.addEventListener('unload', function () {
+        isClosingTab = true; // Se está cerrando la pestaña
+    });
+
+    // Escuchar el evento de navegación
+    window.addEventListener('popstate', function (event) {
+        isClosingTab = false; // No se está cerrando la pestaña, solo navegando hacia atrás
+    });
 </script>
+
