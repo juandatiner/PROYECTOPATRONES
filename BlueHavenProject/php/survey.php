@@ -82,6 +82,7 @@ $conn->close();
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <div class="container mt-5 pt-5">
@@ -92,13 +93,13 @@ $conn->close();
                 <h5>1. ¿Cuál es el tamaño del animal?</h5>
                 <div class="btn-group d-flex" role="group">
                     <input type="radio" class="btn-check" name="question1" id="option1-1" value="pequeno" autocomplete="off">
-                    <label class="btn btn-outline-primary flex-fill" for="option1-1"><i class="bi bi-fish"></i> Pequeño</label>
+                    <label class="btn btn-outline-primary flex-fill" for="option1-1"><i class="bi bi-dash"></i> Pequeño</label>
 
                     <input type="radio" class="btn-check" name="question1" id="option1-2" value="mediano" autocomplete="off">
-                    <label class="btn btn-outline-primary flex-fill" for="option1-2"><i class="bi bi-shield-shaded"></i> Mediano</label>
+                    <label class="btn btn-outline-primary flex-fill" for="option1-2"><i class="bi bi-circle"></i> Mediano</label>
 
                     <input type="radio" class="btn-check" name="question1" id="option1-3" value="grande" autocomplete="off">
-                    <label class="btn btn-outline-primary flex-fill" for="option1-3"><i class="bi bi-house-fill"></i> Grande</label>
+                    <label class="btn btn-outline-primary flex-fill" for="option1-3"><i class="bi bi-circle-fill"></i> Grande</label>
                 </div>
             </div>
 
@@ -107,16 +108,16 @@ $conn->close();
                 <h5>2. ¿Qué tipo de alimentación tiene?</h5>
                 <div class="btn-group d-flex" role="group">
                     <input type="radio" class="btn-check" name="question2" id="option2-1" value="carnivoro" autocomplete="off">
-                    <label class="btn btn-outline-success flex-fill" for="option2-1"><i class="bi bi-droplet"></i> Carnívoro</label>
+                    <label class="btn btn-outline-success flex-fill" for="option2-1"><i class="fas fa-tooth"></i> Carnívoro</label>
 
                     <input type="radio" class="btn-check" name="question2" id="option2-2" value="herbivoro" autocomplete="off">
-                    <label class="btn btn-outline-success flex-fill" for="option2-2"><i class="bi bi-flower"></i> Herbívoro</label>
+                    <label class="btn btn-outline-success flex-fill" for="option2-2"><i class="bi bi-flower1"></i> Herbívoro</label>
 
                     <input type="radio" class="btn-check" name="question2" id="option2-3" value="omnivoro" autocomplete="off">
-                    <label class="btn btn-outline-success flex-fill" for="option2-3"><i class="bi bi-basket-fill"></i> Omnívoro</label>
+                    <label class="btn btn-outline-success flex-fill" for="option2-3"><i class="bi bi-egg-fried"></i> Omnívoro</label>
 
                     <input type="radio" class="btn-check" name="question2" id="option2-4" value="filtrador" autocomplete="off">
-                    <label class="btn btn-outline-success flex-fill" for="option2-4"><i class="bi bi-filter-circle-fill"></i> Filtrador</label>
+                    <label class="btn btn-outline-success flex-fill" for="option2-4"><i class="bi bi-droplet-fill"></i> Filtrador</label>
                 </div>
             </div>
 
@@ -128,13 +129,13 @@ $conn->close();
                     <label class="btn btn-outline-info flex-fill" for="option3-1"><i class="bi bi-shield-fill-check"></i> Depredador</label>
 
                     <input type="radio" class="btn-check" name="question3" id="option3-2" value="presa" autocomplete="off">
-                    <label class="btn btn-outline-info flex-fill" for="option3-2"><i class="bi bi-fish"></i> Presa</label>
+                    <label class="btn btn-outline-info flex-fill" for="option3-2"><i class="fas fa-fish"></i> Presa</label>
 
                     <input type="radio" class="btn-check" name="question3" id="option3-3" value="descomponedor" autocomplete="off">
                     <label class="btn btn-outline-info flex-fill" for="option3-3"><i class="bi bi-recycle"></i> Descomponedor</label>
 
                     <input type="radio" class="btn-check" name="question3" id="option3-4" value="simbiotico" autocomplete="off">
-                    <label class="btn btn-outline-info flex-fill" for="option3-4"><i class="bi bi-hand-thumbs-up-fill"></i> Simbiótico</label>
+                    <label class="btn btn-outline-info flex-fill" for="option3-4"><i class="fas fa-water"></i> Simbiótico</label>
                 </div>
             </div>
 
@@ -146,10 +147,10 @@ $conn->close();
                     <label class="btn btn-outline-warning flex-fill" for="option4-1"><i class="bi bi-egg-fill"></i> Ovíparo</label>
 
                     <input type="radio" class="btn-check" name="question4" id="option4-2" value="viviparo" autocomplete="off">
-                    <label class="btn btn-outline-warning flex-fill" for="option4-2"><i class="bi bi-person-fill"></i> Vivíparo</label>
+                    <label class="btn btn-outline-warning flex-fill" for="option4-2"><i class="fas fa-baby"></i> Vivíparo</label>
 
                     <input type="radio" class="btn-check" name="question4" id="option4-3" value="ovoviviparo" autocomplete="off">
-                    <label class="btn btn-outline-warning flex-fill" for="option4-3"><i class="bi bi-gear-fill"></i> Ovovivíparo</label>
+                    <label class="btn btn-outline-warning flex-fill" for="option4-3"><i class="fas fa-egg"></i> Ovovivíparo</label>
                 </div>
             </div>
 
