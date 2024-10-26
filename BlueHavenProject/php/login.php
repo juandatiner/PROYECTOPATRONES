@@ -71,23 +71,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlueHaven - Descubre la Vida Marina</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Login - BlueHaven</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css">
+    <style>
+
+        .navbar {
+            background-color: #106cfc; /* Tono de azul claro */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff; /* Color blanco para el texto */
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #e0e0e0; /* Color de texto al pasar el ratón */
+        }
+    </style>
 </head>
 <body>
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="home.php">BlueHaven</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link" href="http://localhost/bluehaven/BlueHavenProject/php/logout.php" title="Cerrar sesión">
+                            <i class="bi bi-power"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    
+    <!-- Añadir el JavaScript de Bootstrap al final del body -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 
 <!-- Formulario de Iniciar Sesión -->
 <div class="container mt-5 pt-5">

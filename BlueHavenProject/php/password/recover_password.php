@@ -3,7 +3,7 @@ session_start();
 $message = "";
 
 // Cargar autoload de Composer para usar PHPMailer
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
     // Conexión incluida desde el archivo db.php
-    include 'includes/db.php';
+    include '../includes/db.php';
 
     // Verificar si el correo existe
     $sql = "SELECT * FROM usuarios WHERE correo = ?";
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperación de Contraseña</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
     <div class="container mt-5">

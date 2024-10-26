@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar si el código coincide
         if ($codigo_ingresado === $_SESSION['codigo_recuperacion']) {
             // Conexión incluida desde el archivo db.php
-            include 'includes/db.php';
+            include '../includes/db.php';
 
             // Actualizar la contraseña en la base de datos
             $correo = $_SESSION['correo_recuperacion'];
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 unset($_SESSION['codigo_recuperacion']);
                 unset($_SESSION['correo_recuperacion']);
                 // Redirigir a la página de inicio de sesión (opcional)
-                header("Location: login.php");
+                header("Location: ../login.php");
                 exit();
             } else {
                 $message = "Error al actualizar la contraseña. Intente nuevamente.";
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificar Código</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
     <div class="container mt-5">

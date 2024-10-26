@@ -1,0 +1,131 @@
+/* Estilo de fuente principal */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f4f8; /* Fondo de la página */
+    padding: 0;
+    color: #333;
+}
+
+/* Contenedor principal de continentes */
+.container-continents {
+    padding: 60px 20px;
+    text-align: center;
+    margin: 40px auto 100px; /* Aumenta el margen superior a 150px */
+    max-width: 1200px; /* Limita el ancho máximo para una mejor experiencia en pantallas grandes */
+}
+
+.container-continents h2 {
+    margin-bottom: 50px;
+    font-family: 'Poppins', sans-serif; /* Cambia la fuente aquí */
+    font-size: 3.5rem;
+    color: #005f73;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para las tarjetas de continentes */
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre las tarjetas */
+    flex-wrap: wrap;
+}
+
+.continent-card {
+    flex: 1 1 300px;
+    max-width: 350px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background: #333; /* Fondo de la tarjeta */
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Oculta bordes de imagen y efectos de contenido */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; /* Indica que es clicable */
+}
+
+.continent-card:hover {
+    transform: translateY(-8px); /* Eleva la tarjeta al pasar el cursor */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Imagen en la tarjeta */
+.continent-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.continent-card:hover img {
+    transform: scale(1.08); /* Efecto zoom */
+}
+
+/* Cuerpo de la tarjeta */
+.continent-card .card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.continent-card h5 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #0a9396;
+}
+
+.continent-card p {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+/* Estilo del botón */
+.continent-card .btn {
+    background-color: #0a9396;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    color: #fff;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 169, 150, 0.3);
+}
+
+.continent-card .btn:hover {
+    background-color: #94d2bd;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 169, 150, 0.5);
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .container-continents h2 {
+        font-size: 2.5rem;
+    }
+    
+    .continent-card {
+        flex: 1 1 100%; /* Tarjetas en columna */
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-continents h2 {
+        font-size: 2rem;
+    }
+    
+    .continent-card h5 {
+        font-size: 1.5rem;
+    }
+
+    .continent-card p {
+        font-size: 0.9rem;
+    }
+
+    .continent-card .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}

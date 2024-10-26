@@ -1,6 +1,6 @@
 <!-- Footer -->
-<footer class="mt-0">
-    <div class="container">
+<footer class="mt-0" style="background-color: #ffffff; padding: 20px 0;">
+    <div class="container text-center">
         <p class="mb-1">🐾 BlueHaven &copy; 2024 - Todos los derechos reservados.</p>
         <p class="small mb-2">¡Amamos a los animales! 🐕🐈🦁🐠</p>
         <div class="d-flex justify-content-center">
