@@ -2,16 +2,6 @@
 session_start();
 $message = "";
 
-// URL de la página de origen que permitimos
-$pagina_origen = 'http://localhost/bluehaven/BlueHavenProject/php/recover_password.php';
-
-// Verificar si la página fue accedida desde la página de origen
-if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] !== $pagina_origen) {
-    // Si no es de la página de origen, redirigir
-    header("Location: login.php");
-    exit();
-}
-
 // Función para validar la contraseña
 function esContrasenaSegura($contrasena) {
     return strlen($contrasena) >= 8 &&        // Longitud mínima de 8 caracteres
