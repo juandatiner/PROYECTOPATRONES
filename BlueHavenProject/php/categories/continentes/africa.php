@@ -85,6 +85,9 @@ include('../../includes/header.php');
 </head>
 <body>
     <div class="main-container">
+        <!-- Título de la página -->
+        <h1>Animales marinos del continente africano</h1>        
+
         <!-- Menú de filtros a la izquierda -->
         <div class="filter-menu">
             <h2>Filtrar Animales</h2>
@@ -167,6 +170,8 @@ include('../../includes/header.php');
                                 $image_path = $image_base_path . ".jfif";
                             } elseif (file_exists($image_base_path . ".jpeg")) {
                                 $image_path = $image_base_path . ".jpeg";
+                            } elseif (file_exists($image_base_path . ".png")) {
+                                $image_path = $image_base_path . ".png";
                             } else {
                                 // Imagen de respaldo si no se encuentra ninguna de las anteriores
                                 $image_path = "../../../images/default.jpg";

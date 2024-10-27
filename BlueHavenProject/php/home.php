@@ -109,7 +109,7 @@ if ($usuario_nuevo == 1) {
                 </div>
                 <div class="col-md-4">
                     <div class="card category-card">
-                        <img src="../images/peligroExtincion.png" class="card-img-top" alt="Animales en Peligro">
+                        <img src="../images/peligro_Extincion.png" class="card-img-top" alt="Animales en Peligro">
                         <div class="card-body">
                             <h5 class="card-title">Peligro de Extinción</h5>
                             <p class="card-text">Conoce más sobre los animales marinos en peligro de extinción.</p>
