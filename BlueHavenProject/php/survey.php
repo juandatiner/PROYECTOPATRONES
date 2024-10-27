@@ -90,7 +90,7 @@ $conn->close();
         <form id="surveyForm" action="survey.php" method="post">
             <!-- Pregunta 1 -->
             <div class="mb-4">
-                <h5>1. ¿Cuál es el tamaño del animal?</h5>
+                <h5>1. ¿Cuál es el tamaño de tu animal favorito?</h5>
                 <div class="btn-group d-flex" role="group">
                     <input type="radio" class="btn-check" name="question1" id="option1-1" value="pequeno" autocomplete="off">
                     <label class="btn btn-outline-primary flex-fill" for="option1-1"><i class="bi bi-dash"></i> Pequeño</label>
