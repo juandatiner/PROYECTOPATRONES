@@ -94,15 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="home.php">BlueHaven</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link" href="http://localhost/bluehaven/BlueHavenProject/php/logout.php" title="Cerrar sesión">
-                            <i class="bi bi-power"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
@@ -128,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
             </form>
-            <p class="text-center mt-3"><a href="recover_password.php">¿Olvidaste tu contraseña?</a></p>
+            <p class="text-center mt-3"><a href="password/recover_password.php">¿Olvidaste tu contraseña?</a></p>
         </div>
     </div>
 </div>

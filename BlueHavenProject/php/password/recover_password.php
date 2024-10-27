@@ -73,9 +73,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperación de Contraseña</title>
-    <link rel="stylesheet" href="../../css/styles.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh; /* Ocupa toda la altura de la ventana */
+            display: flex; /* Usar flexbox para centrar el contenido */
+            flex-direction: column; /* Coloca los elementos en una columna */
+            justify-content: center; /* Centra verticalmente */
+        }
+        .container {
+            margin-top: 100px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .alert {
+            margin-bottom: 20px;
+        }
+        .navbar {
+            background-color: #106cfc; /* Tono de azul claro */
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff; /* Color blanco para el texto */
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #e0e0e0; /* Color de texto al pasar el ratón */
+        }
+    </style>
 </head>
 <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="http://localhost/bluehaven/BlueHavenProject/php/login.php">BlueHaven</a>
+        </div>
+    </nav>
     <div class="container mt-5">
         <h2 class="text-center">Recuperar Contraseña</h2>
         <div class="row justify-content-center">
@@ -91,5 +131,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

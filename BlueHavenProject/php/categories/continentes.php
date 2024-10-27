@@ -57,6 +57,7 @@ include('../includes/header.php');
                 ["nombre" => "Asia", "imagen" => "asia.jpg", "descripcion" => "Los misterios marinos de Asia te esperan.", "pagina" => "continentes/asia.php"],
                 ["nombre" => "Europa", "imagen" => "europa.jpg", "descripcion" => "Descubre las aguas frías y ricas de Europa.", "pagina" => "continentes/europa.php"],
                 ["nombre" => "Oceanía", "imagen" => "oceania.jpg", "descripcion" => "La vida marina vibrante de Oceanía.", "pagina" => "continentes/oceania.php"],
+                ["nombre" => "Antártida", "imagen" => "antartida.jpg", "descripcion" => "Los animales de los que menos conocemos.", "pagina" => "continentes/antartida.php"]
             ];
 
             foreach ($continentes as $continente) {
@@ -72,56 +73,38 @@ include('../includes/header.php');
     </div>
 
     <script>
-    let navegandoIntencionalmente = false;
+        let navegandoIntencionalmente = false;
 
-    // Función para cerrar sesión
-    function cerrarSesion() {
-        return new Promise((resolve) => {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost/bluehaven/BlueHavenProject/php/logout.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    resolve(); // Resuelve la promesa después de cerrar sesión
-                }
-            };
-            xhr.send("cerrarSesion=1");
-        });
-    }
-
-    // Función de navegación
-    function navigateTo(page) {
-        // Marcar como navegación intencional
-        navegandoIntencionalmente = true;
-        cerrarSesion().then(() => {
-            window.location.href = page;
-        });
-    }
-
-    // Escuchar clicks en enlaces y botones
-    document.addEventListener('click', function(e) {
-        if (e.target.tagName === 'A' || e.target.closest('a')) {
-            navegandoIntencionalmente = true; // Marcar como navegación intencional
+        // Función de navegación
+        function navigateTo(page) {
+            window.location.href = page; // Navegar directamente sin cerrar sesión
         }
-    });
 
-    // Capturar el cierre de la pestaña o ventana
-    window.addEventListener('beforeunload', function (e) {
-        if (!navegandoIntencionalmente) {
-            cerrarSesion();
-        }
-    });
+        // Escuchar clicks en enlaces y botones
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                navegandoIntencionalmente = true; // Marcar como navegación intencional
+            }
+        });
 
-    // Marcar como navegación intencional al cargar la página
-    window.addEventListener('load', function() {
-        navegandoIntencionalmente = true; // Al cargar la página, consideramos que la navegación fue intencional
-    });
+        // Capturar el cierre de la pestaña o ventana
+        window.addEventListener('beforeunload', function (e) {
+            if (!navegandoIntencionalmente) {
+                cerrarSesion();
+            }
+        });
 
-    // Verificar si el usuario está navegando intencionalmente
-    window.addEventListener('popstate', function () {
-        navegandoIntencionalmente = true; // Si vuelve a una página anterior
-    });
-</script>
+        // Marcar como navegación intencional al cargar la página
+        window.addEventListener('load', function() {
+            navegandoIntencionalmente = true; // Al cargar la página, consideramos que la navegación fue intencional
+        });
+
+        // Verificar si el usuario está navegando intencionalmente
+        window.addEventListener('popstate', function () {
+            navegandoIntencionalmente = true; // Si vuelve a una página anterior
+        });
+    </script>
+
 
     <?php include('../includes/footer.php'); ?>
 </body>
