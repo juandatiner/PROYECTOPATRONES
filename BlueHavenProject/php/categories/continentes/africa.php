@@ -155,8 +155,8 @@ include('../../includes/header.php');
                             <div class="card-front">
                             <?php if ($row['en_peligro_extincion']): // Mostrar mensaje "Cuidame" si está en peligro ?>
                                     <div class="cuidame-message">¡Cuídame!</div>
-                                <?php endif; ?>
-
+                            <?php endif; ?>
+                            
                             <?php
                             $image_base_path = "../../../images/" . strtolower(str_replace(' ', '_', $row['nombre']));
                             $image_path = '';

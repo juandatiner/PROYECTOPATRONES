@@ -1,8 +1,8 @@
 <!-- Footer -->
 <footer class="mt-0" style="background-color: #ffffff; padding: 20px 0;">
     <div class="container text-center">
-        <p class="mb-1">🐾 BlueHaven &copy; 2024 - Todos los derechos reservados.</p>
-        <p class="small mb-2">¡Amamos a los animales! 🐕🐈🦁🐠</p>
+        <p class="mb-1">  BlueHaven &copy; 2024 - Todos los derechos reservados.</p>
+        <p class="small mb-2">🐠 ¡Amamos a los animales! 🐠</p>
         <div class="d-flex justify-content-center">
             <a href="#" class="text-black me-2" style="font-size: 18px;">
                 <i class="bi bi-facebook"></i>

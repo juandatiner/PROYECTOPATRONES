@@ -50,6 +50,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_update->bind_param("s", $correo);
             $stmt_update->execute();
             $stmt_update->close();
+            
+             // Obtener el id del usuario basado en el correo
+            $sql_user_id = "SELECT id FROM usuarios WHERE correo = ?";
+            $stmt_user_id = $conn->prepare($sql_user_id);
+            $stmt_user_id->bind_param("s", $correo);
+            $stmt_user_id->execute();
+            $stmt_user_id->bind_result($user_id);
+            $stmt_user_id->fetch();
+            $stmt_user_id->close();
+
+            // Buscar animales que cumplan con las preferencias
+            $sql_select_animals = "SELECT id FROM animales 
+                                WHERE (
+                                        (tamaño_animal = ?) +
+                                        (tipo_alimentacion = ?) +
+                                        (rol_ecologico = ?) +
+                                        (metodo_reproduccion = ?) +
+                                        (habitat_principal = ?)
+                                    ) >= 3";  // Aquí filtramos solo animales que cumplen con 3 o más condiciones
+            $stmt_select_animals = $conn->prepare($sql_select_animals);
+            $stmt_select_animals->bind_param("sssss", $tamaño_animal, $tipo_alimentacion, $rol_ecologico, $metodo_reproduccion, $habitat_principal);
+            $stmt_select_animals->execute();
+            $result = $stmt_select_animals->get_result();
+            
+            // Insertar cada animal encontrado en la tabla favoritos
+            $sql_insert_favorite = "INSERT IGNORE INTO favoritos (user_id, animal_id) VALUES (?, ?)";
+            $stmt_insert_favorite = $conn->prepare($sql_insert_favorite);
+            
+            while ($row = $result->fetch_assoc()) {
+                $animal_id = $row['id'];
+                $stmt_insert_favorite->bind_param("ii", $user_id, $animal_id);
+                $stmt_insert_favorite->execute();
+            }
+            
+            // Cerrar declaraciones
+            $stmt_insert_favorite->close();
+            $stmt_select_animals->close();
 
             // Redirigir con mensaje de éxito
             echo "<script>
