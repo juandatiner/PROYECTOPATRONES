@@ -160,33 +160,33 @@ include('../includes/header.php');
                     <div class="animal-card">
                         <div class="card-inner">
                             <div class="card-front">
-                            <?php if ($row['en_peligro_extincion']): // Mostrar mensaje "Cuidame" si está en peligro ?>
-                                    <div class="cuidame-message">¡Cuídame!</div>
+                                <?php if ($row['en_peligro_extincion']): ?>
+                                        <div class="cuidame-message">¡Cuídame!</div>
                                 <?php endif; ?>
 
-                            <?php
-                            $image_base_path = "../../images/" . strtolower(str_replace(' ', '_', $row['nombre']));
-                            $image_path = '';
+                                <?php
+                                $image_base_path = "../../images/" . strtolower(str_replace(' ', '_', $row['nombre']));
+                                $image_path = '';
 
-                            // Verificar si la imagen con extensión .jpg, .gif o .jfif existe
-                            if (file_exists($image_base_path . ".jpg")) {
-                                $image_path = $image_base_path . ".jpg";
-                            } elseif (file_exists($image_base_path . ".gif")) {
-                                $image_path = $image_base_path . ".gif";
-                            } elseif (file_exists($image_base_path . ".jfif")) {
-                                $image_path = $image_base_path . ".jfif";
-                            } elseif (file_exists($image_base_path . ".jpeg")) {
-                                $image_path = $image_base_path . ".jpeg";
-                            } elseif (file_exists($image_base_path . ".png")) {
-                                $image_path = $image_base_path . ".png";
-                            } else {
-                                // Imagen de respaldo si no se encuentra ninguna de las anteriores
-                                $image_path = "../../images/default.jpg";
-                            }
-                            ?>
+                                // Verificar si la imagen con extensión .jpg, .gif o .jfif existe
+                                if (file_exists($image_base_path . ".jpg")) {
+                                    $image_path = $image_base_path . ".jpg";
+                                } elseif (file_exists($image_base_path . ".gif")) {
+                                    $image_path = $image_base_path . ".gif";
+                                } elseif (file_exists($image_base_path . ".jfif")) {
+                                    $image_path = $image_base_path . ".jfif";
+                                } elseif (file_exists($image_base_path . ".jpeg")) {
+                                    $image_path = $image_base_path . ".jpeg";
+                                } elseif (file_exists($image_base_path . ".png")) {
+                                    $image_path = $image_base_path . ".png";
+                                } else {
+                                    // Imagen de respaldo si no se encuentra ninguna de las anteriores
+                                    $image_path = "../../images/default.jpg";
+                                }
+                                ?>
 
-                            <img src="<?php echo $image_path; ?>" alt="<?php echo $row['nombre']; ?>" class="animal-image">
-                                <h3><?php echo ucfirst($row['nombre']); ?></h3>
+                                <img src="<?php echo $image_path; ?>" alt="<?php echo $row['nombre']; ?>" class="animal-image">
+                                    <h3><?php echo ucfirst($row['nombre']); ?></h3>
                             </div>
                             <div class="card-back">
                                 <p><strong>Tamaño:</strong> <?php echo ucfirst($row['tamaño_animal']); ?></p>
