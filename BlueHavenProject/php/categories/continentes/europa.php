@@ -153,7 +153,10 @@ include('../../includes/header.php');
                     <div class="animal-card">
                         <div class="card-inner">
                             <div class="card-front">
-                            <?php if ($row['en_peligro_extincion']): // Mostrar mensaje "Cuidame" si está en peligro ?>
+                                <div class="heart-icon" onclick="toggleHeart()">
+                                    <img id="heartIcon" src="../../../images/corazon_blanco.jpg" onclick="toggleHeart(this);" alt="Corazón" /> <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+                                </div>
+                                <?php if ($row['en_peligro_extincion']): // Mostrar mensaje "Cuidame" si está en peligro ?>
                                     <div class="cuidame-message">¡Cuídame!</div>
                                 <?php endif; ?>
 
@@ -200,14 +203,40 @@ include('../../includes/header.php');
         </div>
     </div>
     <script>
-        // JavaScript para manejar el efecto de voltear la tarjeta
-        document.querySelectorAll('.animal-card').forEach(card => {
-            card.addEventListener('click', () => {
+    // JavaScript para manejar el efecto de voltear la tarjeta
+    document.querySelectorAll('.animal-card').forEach(card => {
+        // Evento para la tarjeta
+        card.addEventListener('click', (event) => {
+            // Verificar si el clic fue en el corazón
+            if (!event.target.classList.contains('heart-icon')) {
                 card.querySelector('.card-inner').classList.toggle('flipped');
-            });
+            }
         });
-    </script>
-    <script>
+
+        // Obtener el ícono del corazón dentro de la tarjeta
+        const heartIcon = card.querySelector('.heart-icon');
+
+        // Verificar si el ícono del corazón existe antes de agregar el evento
+        if (heartIcon) {
+            // Evento para el corazón
+            heartIcon.addEventListener('click', (event) => {
+                event.stopPropagation(); // Detener la propagación del clic hacia la tarjeta
+                toggleHeart(heartIcon); // Llama a la función para cambiar la imagen del corazón
+            });
+        }
+    });
+
+    // Función para alternar el corazón
+    function toggleHeart(heartIcon) {
+        // Verifica si la fuente del corazón incluye el color blanco
+        console.log("Heart icon clicked!"); // Para verificar si se llama la función
+        if (heartIcon.src.includes("corazon_blanco.jpg")) {
+            heartIcon.src = "../../../images/corazon_rojo.jpg"; 
+        } else {
+            heartIcon.src = "../../../images/corazon_blanco.jpg"; 
+        }
+    }
+
     let navegandoIntencionalmente = false;
 
     // Función para cerrar sesión
