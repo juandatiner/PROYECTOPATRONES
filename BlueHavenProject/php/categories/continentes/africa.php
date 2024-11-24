@@ -31,7 +31,6 @@ if ($usuario_nuevo == 1) {
     exit();
 }
 
-
 // Obtener filtros seleccionados
 $tamaño_animal = isset($_GET['tamaño_animal']) ? $_GET['tamaño_animal'] : '';
 $tipo_alimentacion = isset($_GET['tipo_alimentacion']) ? $_GET['tipo_alimentacion'] : '';
@@ -61,7 +60,6 @@ if ($metodo_reproduccion) {
 if ($habitat_principal) {
     $sql_animales .= " AND habitat_principal = '$habitat_principal'";
 }
-
 if ($en_peligro_extincion === "1") {
     $sql_animales .= " AND en_peligro_extincion = 1"; // Solo en peligro
 } elseif ($en_peligro_extincion === "0") {
@@ -94,52 +92,52 @@ include('../../includes/header.php');
             <form method="GET" action="">
                 <label for="tamaño_animal">Tamaño del Animal</label>
                 <select name="tamaño_animal" id="tamaño_animal">
-                    <option value="">Todos</option>
-                    <option value="pequeño">Pequeño</option>
-                    <option value="mediano">Mediano</option>
-                    <option value="grande">Grande</option>
+                    <option value="" <?= $tamaño_animal == '' ? 'selected' : '' ?>>Todos</option>
+                    <option value="pequeño" <?= $tamaño_animal == 'pequeño' ? 'selected' : '' ?>>Pequeño</option>
+                    <option value="mediano" <?= $tamaño_animal == 'mediano' ? 'selected' : '' ?>>Mediano</option>
+                    <option value="grande" <?= $tamaño_animal == 'grande' ? 'selected' : '' ?>>Grande</option>
                 </select>
 
                 <label for="tipo_alimentacion">Tipo de Alimentación</label>
                 <select name="tipo_alimentacion" id="tipo_alimentacion">
-                    <option value="">Todos</option>
-                    <option value="carnivoro">Carnívoro</option>
-                    <option value="herbivoro">Herbívoro</option>
-                    <option value="omnivoro">Omnívoro</option>
-                    <option value="filtrador">Filtrador</option>
+                    <option value="" <?= $tipo_alimentacion == '' ? 'selected' : '' ?>>Todos</option>
+                    <option value="carnivoro" <?= $tipo_alimentacion == 'carnivoro' ? 'selected' : '' ?>>Carnívoro</option>
+                    <option value="herbivoro" <?= $tipo_alimentacion == 'herbivoro' ? 'selected' : '' ?>>Herbívoro</option>
+                    <option value="omnivoro" <?= $tipo_alimentacion == 'omnivoro' ? 'selected' : '' ?>>Omnívoro</option>
+                    <option value="filtrador" <?= $tipo_alimentacion == 'filtrador' ? 'selected' : '' ?>>Filtrador</option>
                 </select>
 
                 <label for="rol_ecologico">Rol Ecológico</label>
                 <select name="rol_ecologico" id="rol_ecologico">
-                    <option value="">Todos</option>
-                    <option value="depredador">Depredador</option>
-                    <option value="presa">Presa</option>
-                    <option value="descomponedor">Descomponedor</option>
-                    <option value="simbiotico">Simbiótico</option>
+                    <option value="" <?= $rol_ecologico == '' ? 'selected' : '' ?>>Todos</option>
+                    <option value="depredador" <?= $rol_ecologico == 'depredador' ? 'selected' : '' ?>>Depredador</option>
+                    <option value="presa" <?= $rol_ecologico == 'presa' ? 'selected' : '' ?>>Presa</option>
+                    <option value="descomponedor" <?= $rol_ecologico == 'descomponedor' ? 'selected' : '' ?>>Descomponedor</option>
+                    <option value="simbiotico" <?= $rol_ecologico == 'simbiotico' ? 'selected' : '' ?>>Simbiótico</option>
                 </select>
 
                 <label for="metodo_reproduccion">Método de Reproducción</label>
                 <select name="metodo_reproduccion" id="metodo_reproduccion">
-                    <option value="">Todos</option>
-                    <option value="oviparo">Ovíparo</option>
-                    <option value="viviparo">Vivíparo</option>
-                    <option value="ovoviviparo">Ovovivíparo</option>
+                    <option value="" <?= $metodo_reproduccion == '' ? 'selected' : '' ?>>Todos</option>
+                    <option value="oviparo" <?= $metodo_reproduccion == 'oviparo' ? 'selected' : '' ?>>Ovíparo</option>
+                    <option value="viviparo" <?= $metodo_reproduccion == 'viviparo' ? 'selected' : '' ?>>Vivíparo</option>
+                    <option value="ovoviviparo" <?= $metodo_reproduccion == 'ovoviviparo' ? 'selected' : '' ?>>Ovovivíparo</option>
                 </select>
 
                 <label for="habitat_principal">Hábitat Principal</label>
                 <select name="habitat_principal" id="habitat_principal">
-                    <option value="">Todos</option>
-                    <option value="oceano">Océano</option>
-                    <option value="manglar">Manglar</option>
-                    <option value="coral">Coral</option>
-                    <option value="playa">Playa</option>
+                    <option value="" <?= $habitat_principal == '' ? 'selected' : '' ?>>Todos</option>
+                    <option value="oceano" <?= $habitat_principal == 'oceano' ? 'selected' : '' ?>>Océano</option>
+                    <option value="manglar" <?= $habitat_principal == 'manglar' ? 'selected' : '' ?>>Manglar</option>
+                    <option value="coral" <?= $habitat_principal == 'coral' ? 'selected' : '' ?>>Coral</option>
+                    <option value="playa" <?= $habitat_principal == 'playa' ? 'selected' : '' ?>>Playa</option>
                 </select>
 
                 <label for="en_peligro_extincion">En Peligro de Extinción</label>
                 <select name="en_peligro_extincion" id="en_peligro_extincion">
-                    <option value="">Todos</option>
-                    <option value="1">Sí</option>
-                    <option value="0">No</option>
+                    <option value="" <?= $en_peligro_extincion == '' ? 'selected' : '' ?>>Todos</option>
+                    <option value="1" <?= $en_peligro_extincion === "1" ? 'selected' : '' ?>>Sí</option>
+                    <option value="0" <?= $en_peligro_extincion === "0" ? 'selected' : '' ?>>No</option>
                 </select>
 
                 <button type="submit">Aplicar Filtros</button>

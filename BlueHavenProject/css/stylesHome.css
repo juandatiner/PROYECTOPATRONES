@@ -1,59 +1,127 @@
 /* Estilos generales */
 body {
-    background: white;
-    font-family: 'Montserrat', sans-serif; /* Fuente moderna */
     margin: 0;
     padding: 0;
-    color: #444; /* Color de texto general */
-    padding-top: 20px; /* Espacio superior adicional */
+    font-family: 'Montserrat', sans-serif;
+    color: #444;
+    background-color: white;
+    overflow: hidden; /* Evita barras de desplazamiento */
 }
-
 
 /* Hero Video */
 .hero-video {
-    position: relative;
+    position: fixed; /* Asegura que el video ocupe toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ancho completo de la ventana */
+    height: 100vh; /* Alto completo de la ventana */
     overflow: hidden; /* Evita que el contenido sobresalga */
-    height: 400px; /* Ajusta la altura según tus necesidades */
-    margin-bottom: 30px; /* Espacio abajo para el carrusel */
+    z-index: -1; /* Asegura que el video esté detrás del contenido */
 }
 
 .hero-video iframe {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%); /* Centra el video */
-    border: none; /* Sin borde */
+    transform: translate(-50%, -50%);
+    width: 100vw; /* Asegura que siempre ocupe todo el ancho */
+    height: 100vh; /* Asegura que siempre ocupe todo el alto */
+    object-fit: cover; /* Ajusta el contenido para que llene el contenedor */
+    border: none; /* Sin bordes */
+    pointer-events: none; /* Desactiva interacción del usuario */
 }
+
 
 /* Contenedor principal */
 .container {
     max-width: 900px;
-    background-color: white;
-    padding: 40px;
-    border-radius: 20px; /* Bordes redondeados */
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
-    margin: 2rem auto; /* Centrando el contenedor */
-    transition: transform 0.3s;
-}
-
-.container:hover {
-    transform: translateY(-5px); /* Efecto de elevación */
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Títulos */
 h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5rem; /* Títulos grandes */
+    font-size: 2.5rem;
     color: #333;
+    margin-bottom: 15px;
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
     font-weight: bold;
 }
 
-/* Etiquetas y formularios */
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Galería de imágenes */
+.gallery-section {
+    padding: 40px 0;
+}
+
+.gallery-section h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.carousel-item img {
+    width: 100%; /* Asegúrate de que las imágenes ocupen todo el ancho */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Botones del carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    filter: invert(1); /* Cambia el color de los controles a blanco */
+}
+
+/* Tarjetas de categorías */
+.card {
+    border: none; /* Sin borde */
+    border-radius: 15px; /* Bordes redondeados */
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el cursor */
+}
+
+/* Botones de las tarjetas */
+.card .btn-primary {
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.card .btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Aumento al pasar el cursor */
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f4f4f4;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Estilos para formularios */
 .form-label {
     font-weight: bold;
     color: #333;
@@ -61,36 +129,36 @@ h2 {
 }
 
 .form-control {
-    border: 2px solid #007BFF; /* Borde azul */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 15px; /* Espaciado interno mayor */
+    border: 2px solid #007BFF;
+    border-radius: 10px;
+    padding: 15px;
     margin-bottom: 20px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-control:focus {
-    border-color: #0056b3; /* Color de foco */
+    border-color: #0056b3;
     box-shadow: 0 0 5px rgba(0, 91, 187, 0.5);
 }
 
-/* Botones */
+/* Botones generales */
 .btn-primary {
-    background-color: #007BFF; /* Color de fondo del botón */
+    background-color: #007BFF;
     border: none;
     color: white;
     padding: 15px 30px;
     font-size: 1.1rem;
-    border-radius: 25px; /* Bordes redondeados */
+    border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Color de hover */
-    transform: scale(1.05); /* Aumento al pasar el cursor */
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
-/* Mensajes de alerta */
+/* Alertas */
 .alert {
     padding: 15px;
     margin-top: 20px;
@@ -106,55 +174,6 @@ h2 {
 .alert-success {
     background-color: #d4edda;
     color: #155724;
-}
-
-/* Tarjetas de categorías */
-.card {
-    border: none; /* Sin borde */
-    border-radius: 15px; /* Bordes redondeados */
-    transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Sombra más fuerte al pasar el cursor */
-}
-
-/* Estilos para botones de tarjeta */
-.card-button {
-    background-color: #007BFF; /* Color de fondo del botón de tarjeta */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px; /* Bordes redondeados */
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.card-button:hover {
-    background-color: #0056b3; /* Color de hover */
-    transform: scale(1.05); /* Aumento al pasar el cursor */
-}
-
-/* Estilo para la sección de la galería */
-.gallery-section {
-    padding: px 0; /* Espaciado en la parte superior e inferior */
-}
-
-.gallery-section h2 {
-    margin-bottom: 20px; /* Espacio entre el título y el carrusel */
-}
-
-/* Estilo para el carrusel */
-.carousel-item img {
-    width: 100%; /* Asegúrate de que las imágenes ocupen el 100% del ancho del contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
-    border-radius: 10px; /* Bordes redondeados para las imágenes */
-}
-
-/* Botones del carrusel */
-.carousel-control-prev,
-.carousel-control-next {
-    filter: invert(1); /* Cambia el color de los controles a blanco para mejorar la visibilidad */
 }
 
 /* Estilos responsivos */
@@ -174,15 +193,14 @@ h2 {
     }
 
     h2 {
-        font-size: 2rem; /* Títulos más pequeños en pantallas pequeñas */
+        font-size: 2rem;
     }
 
     .hero-video {
-        height: 250px; /* Reduce la altura del video en pantallas pequeñas */
+        height: 250px;
     }
 }
 
-/* Estilos para texto centrado y márgenes */
 .text-center {
     margin-top: 30px;
 }
