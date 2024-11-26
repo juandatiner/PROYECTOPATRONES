@@ -1,57 +1,47 @@
 <?php
 // Incluir la conexión a la base de datos desde 'includes/db.php'
 include('includes/db.php');
+include('SessionManager.php');
+
+// Crear una instancia del gestor de sesiones
+$sessionManager = new SessionManager($conn);
 
 // Verificar si el usuario está logueado
-session_start();
-if (!isset($_SESSION['correo'])) {
-    // Si no hay sesión de usuario, redirigir al login
-    header("Location: login.php");
-    exit();
+if (!$sessionManager->isUserLoggedIn()) {
+    $sessionManager->redirectTo("login.php");
 }
 
+// Obtener los datos de sesión del usuario
 $correo = $_SESSION['correo'];
+$sessionData = $sessionManager->getSessionData($correo);
 
-// Verificar si la sesión está activa
-$sql_check_sesion = "SELECT sesion_activa, usuario_nuevo FROM usuarios WHERE correo = ?";
-$stmt_check_sesion = $conn->prepare($sql_check_sesion);
-$stmt_check_sesion->bind_param("s", $correo);
-$stmt_check_sesion->execute();
-$stmt_check_sesion->bind_result($sesion_activa, $usuario_nuevo);
-$stmt_check_sesion->fetch();
-$stmt_check_sesion->close();
-
-// Verificar si la sesión está activa (sesion_activa = 1)
-if ($sesion_activa == 0) {
-    // Redirigir al login si la sesión no está activa
-    header("Location: login.php");
-    exit();
+// Si no se encuentra el usuario o la sesión no está activa
+if (!$sessionData || $sessionData['sesion_activa'] == 0) {
+    $sessionManager->redirectTo("login.php");
 }
 
-// Verificar si el usuario ya ha completado la encuesta
-if ($usuario_nuevo == 1) {
-    // Si el usuario es nuevo (usuario_nuevo = 1), redirigir a la encuesta
-    header("Location: survey.php");
-    exit();
-} else {
-    // Si ya completó la encuesta, mostrar el contenido de la página principal
-    include('includes/header.php');
-    ?>
+// Verificar si el usuario ya completó la encuesta
+if ($sessionData['usuario_nuevo'] == 1) {
+    $sessionManager->redirectTo("survey.php");
+}
+
+// Mostrar la página principal
+include('includes/header.php');
+?>
+
 
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
-    <link rel="stylesheet" href="../css/stylesHome.css"> <!-- Asegúrate de que esta ruta sea correcta -->
+    <link rel="stylesheet" href="../css/stylesHome.css">
 </head>
-
 <body>
-    
 
+    <!-- Sección del Video -->
     <section class="hero-video">
         <iframe 
             src="https://www.youtube.com/embed/6XX3o_iH8Ps?autoplay=1&mute=1&loop=1&playlist=6XX3o_iH8Ps&controls=0"
@@ -60,7 +50,6 @@ if ($usuario_nuevo == 1) {
             allowfullscreen>
         </iframe>
     </section>
-
 
     <!-- Galería de Imágenes Dinámica -->
     <section id="gallery" class="gallery-section">
@@ -122,7 +111,7 @@ if ($usuario_nuevo == 1) {
                         <img src="../images/favorites.jpg" class="card-img-top" alt="Favoritos">
                         <div class="card-body">
                             <h5 class="card-title">Favoritos</h5>
-                            <p class="card-text">Encuentra aquí todos los animales marinos que mas te gustan.</p>
+                            <p class="card-text">Encuentra aquí todos los animales marinos que más te gustan.</p>
                             <a href="categories/favoritos.php" class="btn btn-primary">Explorar</a>
                         </div>
                     </div>
@@ -131,6 +120,9 @@ if ($usuario_nuevo == 1) {
         </div>
     </section>
 
+    <?php include('includes/footer.php'); ?>
+
+    
     <script>
     // Variable para indicar si el usuario está navegando
     var navegandoIntencionalmente = false;
@@ -175,12 +167,17 @@ if ($usuario_nuevo == 1) {
         navegandoIntencionalmente = true; // Al cargar la página, consideramos que la navegación fue intencional
     });
     </script>
-
-    <?php include('includes/footer.php'); ?>
-
-</body>
-
-</html>
 <?php
-}
 ?>
+
+/*
+ * Aplicación de los Principios SOLID
+ * 
+ * SRP (Single Responsibility Principle):
+ * - La clase SessionManager tiene una única responsabilidad: gestionar las sesiones y la lógica de autenticación del usuario.
+ * - El script principal ahora solo contiene la lógica para mostrar la página, delegando las tareas específicas a la clase.
+ * 
+ * OCP (Open/Closed Principle):
+ * - La clase SessionManager puede extenderse fácilmente, por ejemplo, para agregar nuevas validaciones (como permisos de usuario o roles) sin modificar su lógica existente.
+ * - Si se necesita agregar más redirecciones o lógicas adicionales, se puede hacer dentro de esta clase sin tocar el código principal.
+ */

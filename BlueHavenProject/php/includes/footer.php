@@ -10,11 +10,11 @@
             <a href="#" class="text-black me-2" style="font-size: 18px;">
                 <i class="bi bi-twitter"></i>
             </a>
-            <a href="#" class="text-black me-2" style="font-size: 18px;">
+            <a href="https://www.instagram.com/bluehavenfundation?igsh=djRub25naDRwb3Iw&utm_source=ig_contact_invite" class="text-black me-2" style="font-size: 18px;">
                 <i class="bi bi-instagram"></i>
             </a>
-            <a href="#" class="text-black" style="font-size: 18px;">
-                <i class="bi bi-linkedin"></i>
+            <a href="mailto:bluehavenrecovery@gmail.com" class="text-black" style="font-size: 18px;">
+                <i class="bi bi-envelope-fill"></i>
             </a>
         </div>
     </div>
