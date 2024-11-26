@@ -1,10 +1,11 @@
 <?php
-// Incluir la conexión a la base de datos desde 'includes/db.php'
-include('includes/db.php');
+// Incluir los archivos necesarios
+include('Database.php');
 include('SessionManager.php');
+include('SessionManagerFactory.php');
 
-// Crear una instancia del gestor de sesiones
-$sessionManager = new SessionManager($conn);
+// Crear una instancia del gestor de sesiones usando el Factory Method
+$sessionManager = SessionManagerFactory::create();
 
 // Verificar si el usuario está logueado
 if (!$sessionManager->isUserLoggedIn()) {
@@ -28,8 +29,6 @@ if ($sessionData['usuario_nuevo'] == 1) {
 // Mostrar la página principal
 include('includes/header.php');
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -169,15 +168,3 @@ include('includes/header.php');
     </script>
 <?php
 ?>
-
-/*
- * Aplicación de los Principios SOLID
- * 
- * SRP (Single Responsibility Principle):
- * - La clase SessionManager tiene una única responsabilidad: gestionar las sesiones y la lógica de autenticación del usuario.
- * - El script principal ahora solo contiene la lógica para mostrar la página, delegando las tareas específicas a la clase.
- * 
- * OCP (Open/Closed Principle):
- * - La clase SessionManager puede extenderse fácilmente, por ejemplo, para agregar nuevas validaciones (como permisos de usuario o roles) sin modificar su lógica existente.
- * - Si se necesita agregar más redirecciones o lógicas adicionales, se puede hacer dentro de esta clase sin tocar el código principal.
- */
