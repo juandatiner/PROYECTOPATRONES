@@ -5,31 +5,33 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: #444;
     background-color: white;
-    overflow: hidden; /* Evita barras de desplazamiento */
+    overflow: auto;
 }
 
 /* Hero Video */
 .hero-video {
-    position: fixed; /* Asegura que el video ocupe toda la pantalla */
-    top: 0;
-    left: 0;
-    width: 100vw; /* Ancho completo de la ventana */
-    height: 100vh; /* Alto completo de la ventana */
-    overflow: hidden; /* Evita que el contenido sobresalga */
-    z-index: -1; /* Asegura que el video esté detrás del contenido */
+    position: relative;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 1200px; /* Limita el ancho máximo para evitar que sea demasiado grande */
+    height: auto;
+    margin: 30px auto; /* Agrega espacio superior e inferior */
+    overflow: hidden;
+    padding-top: 50px; /* Opcional: Puedes usar padding si quieres controlar el espacio interno */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    background: #f8f8f8; /* Fondo gris claro (opcional, en caso de contenido vacío) */
 }
 
 .hero-video iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100vw; /* Asegura que siempre ocupe todo el ancho */
-    height: 100vh; /* Asegura que siempre ocupe todo el alto */
-    object-fit: cover; /* Ajusta el contenido para que llene el contenedor */
-    border: none; /* Sin bordes */
-    pointer-events: none; /* Desactiva interacción del usuario */
+    width: 100%;
+    height: 56.25vw; /* Altura proporcional para videos con relación de aspecto 16:9 */
+    max-height: 600px; /* Limita la altura máxima para pantallas grandes */
+    object-fit: cover;
+    border: none;
+    border-radius: 15px; /* Aplica bordes redondeados al iframe también */
+    pointer-events: none;
 }
+
 
 
 /* Contenedor principal */
@@ -198,6 +200,9 @@ footer p {
 
     .hero-video {
         height: 250px;
+    }
+    .hero-video iframe {
+        height: 50vw; /* Ajusta la altura para pantallas pequeñas */
     }
 }
 

@@ -56,7 +56,7 @@ if ($usuario_nuevo == 1) {
         <iframe 
             src="https://www.youtube.com/embed/6XX3o_iH8Ps?autoplay=1&mute=1&loop=1&playlist=6XX3o_iH8Ps&controls=0"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="autoplay; encrypted-media"
             allowfullscreen>
         </iframe>
     </section>
